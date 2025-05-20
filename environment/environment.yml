@@ -1,0 +1,17 @@
+name: ds-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - statsmodels
+  - jupyter
+  - pip
+  - pip:
+      - streamlit
+      - pandas-profiling
