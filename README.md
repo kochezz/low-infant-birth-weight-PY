@@ -1,5 +1,5 @@
 
-# 👶 Low Infant Birth Weight Classification using Logistic Regression (Python)
+# Low Infant Birth Weight Classification using Logistic Regression (Python)
 
 [![Built With Python](https://img.shields.io/badge/Built%20With-Python-blue?logo=python)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -46,7 +46,7 @@ APM_low_infant_birth_wt_PY/
 
 ---
 
-## 🧪 Model Development Summary
+##  Model Development Summary
 
 | Step                | Outcome                                                                 |
 |---------------------|-------------------------------------------------------------------------|
