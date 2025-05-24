@@ -1,113 +1,81 @@
-# Low Birth Weight Prediction Project (Python)
 
-This project applies logistic regression to predict low infant birth weight based on maternal and prenatal variables using Python.
+# Low Infant Birth Weight Prediction (Python)
 
----
+[![Built With](https://img.shields.io/badge/Built%20With-Python-blue)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Status](https://img.shields.io/badge/Status-In%20Progress-orange)]()
+[![Data](https://img.shields.io/badge/Data-Cleaned-lightgrey)]()
 
-## 📁 Project Structure
+## Overview
+
+This project aims to develop a logistic regression model in Python to predict the likelihood of low infant birth weight using a dataset containing demographic and clinical features. It is a follow-up to an R-based version of the same analysis.
+
+## Dataset
+
+The dataset contains 189 records with variables including:
+- `age`: Age of the mother
+- `lwt`: Weight at last menstrual period
+- `race`: Race (1 = White, 2 = Black, 3 = Other)
+- `smoke`: Smoking status (1 = Yes, 0 = No)
+- `ptl`: Number of premature labors
+- `ht`: History of hypertension (1 = Yes, 0 = No)
+- `ui`: Uterine irritability (1 = Yes, 0 = No)
+- `ftv`: Number of physician visits in the first trimester
+- `low`: Target variable indicating if the birth weight was low
+
+## Workflow
+
+1. **Data Loading**  
+   Data was pulled from a PostgreSQL database hosted on Neon.tech.
+
+2. **EDA & Cleaning**  
+   - Initial profiling using pandas and seaborn
+   - Visualizations using `seaborn` and `matplotlib`
+   - Converted categorical features to binary/factor levels
+
+3. **Modeling**  
+   - Fitted logistic regression model using `scikit-learn`
+   - Evaluated with accuracy, precision, recall, and F1-score
+   - Compared predictions with classification thresholds: 0.3, 0.4, 0.55
+   - ROC curve and AUC calculated to assess discriminative ability
+
+4. **Insights**  
+   - `smoke`, `race`, `ht`, and `ui` were the most influential variables
+   - Optimal threshold based on misclassification rate: **0.4**
+   - AUC ≈ 0.73 suggests moderate model performance
+
+5. **Model Export**  
+   Saved using `joblib` for future deployment
+
+## Directory Structure
 
 ```
-APM_low_infant_birth_wt_PY/
-├── data/
-│   ├── raw/
+├── data
+│   ├── raw
 │   │   └── birth_wt_clean.csv
-│   ├── processed/
-│   │   ├── train_data.csv
-│   │   └── test_data.csv
-├── models/
-│   └── logit_model.pkl
-├── notebooks/
-│   └── 01_modeling.ipynb
-├── outputs/
-│   └── visualizations/
-├── .env
+│   └── processed
+├── notebooks
+│   └── analysis.ipynb
+├── models
+│   └── birth_wt_model.pkl
+├── scripts
+│   └── utils.py
 └── README.md
 ```
 
----
+## Setup
 
-## 🧪 Objective
+```bash
+# Clone the repository
+git clone https://github.com/kochezz/low-infant-birth-weight-PY.git
 
-To predict whether an infant's birth weight is low using maternal characteristics and clinical data.
+# Navigate into the project directory
+cd low-infant-birth-weight-PY
 
-**Target Variable**:  
-- `low` (1 = Low birth weight, 0 = Not low)
-
-**Predictors**:  
-- `age`: Mother’s age  
-- `lwt`: Weight at last menstrual period  
-- `race`: (White, Black, Other)  
-- `smoke`: Smoked during pregnancy  
-- `ptl`: Premature labor history  
-- `ht`: Hypertension history  
-- `ui`: Uterine irritability  
-- `ftv`: First trimester physician visits  
-
----
-
-## 🧹 Data Processing
-
-- Removed identifiers: `sr_no`, `id`
-- Encoded categorical features
-- Saved cleaned dataset to `processed/` directory
-
----
-
-## 📊 Exploratory Data Analysis (EDA)
-
-- Faceted visualizations were used to explore trends.
-- Smoking, hypertension, and uterine irritability were linked to higher low birth weight risks.
-- Distributions of age and weight (lwt) were examined for trends by target class.
-
----
-
-## 🧠 Model Building
-
-Model: Logistic Regression (via `sklearn`)  
-Train-test split: 80/20 (random state 123)  
-Performance measured on test set
-
----
-
-## 📈 Evaluation
-
-**Threshold Evaluation Summary**:
-
-| Threshold | Sensitivity | Specificity | Misclassification |
-|-----------|-------------|-------------|--------------------|
-| 0.30      | 0.50        | 0.73        | 0.34               |
-| 0.40      | 0.42        | 0.96        | 0.21               |
-| 0.55      | 0.08        | 1.00        | 0.29               |
-
-- **Recommended Cutoff**: 0.40 based on better trade-off between true positive and false positive rates in this test split.
-- **ROC AUC Score**: 0.73 (Moderate discriminative power)
-
----
-
-## 💾 Model Saving
-
-Trained model saved as `logit_model.pkl`:
-```python
-import joblib
-joblib.dump(logit_model, 'models/logit_model.pkl')
+# Install requirements
+pip install -r requirements.txt
 ```
 
----
+## License
 
-## 🧭 Insights
-
-- Logistic regression yielded moderate accuracy.
-- Feature `smoke`, `race`, and `ht` had stronger influence based on model coefficients.
-- Threshold selection affected sensitivity and specificity balance.
-- Results slightly differ from the R project due to different train-test partitions.
-
----
-
-## 👨‍💻 Author
-
-**William C. Phiri**  
-🔗 [GitHub](https://github.com/kochezz) | [LinkedIn](https://www.linkedin.com/in/william-phiri-866b8443/)
-
----
-
-_Last updated: May 24, 2025_
+This project is licensed under the MIT License.
